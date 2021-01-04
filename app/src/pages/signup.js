@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useAuth } from '../hooks/use-auth';
+import { Navigation } from '../components';
 
 export default function Signup() {
   const [username, setUserName] = useState('');
@@ -15,6 +17,9 @@ export default function Signup() {
 
   return (
     <>
+      <Navigation>
+        <Link to='/signin'>Sign in</Link>
+      </Navigation>
       <form onSubmit={handleSignup} >
         <input type='text' defaultValue='' placeholder="username" onChange={e => setUserName(e.target.value)} />
         <input type='password' defaultValue='' placeholder="password" onChange={e => setPassword(e.target.value)} />
