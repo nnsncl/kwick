@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
-import axios from 'axios';
+
+import { UsersContainer } from '../containers';
 
 export default function Chat() {
     const auth = useAuth();
-    const [users, setUsers] = useState([]);
 
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
@@ -26,20 +27,6 @@ export default function Chat() {
         //eslint-disable-next-line
     }, [])
 
-    useEffect(() => {
-        async function getLoggedUsers() {
-            try {
-                const response = await axios.get(`${auth.apiURL}/user/logged/${auth.localStorageUser.token}`);
-                setUsers(response.data.result.user);
-
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getLoggedUsers();
-        //eslint-disable-next-line 
-    }, [])
-
     const handlePostMessage = (e) => {
         e.preventDefault();
         async function sendMessage() {
@@ -54,27 +41,10 @@ export default function Chat() {
         getMessages();
     }
 
-
-    // const signout = () => {
-    //   try {
-    //     axios.get(`${auth.apiURL}/logout/${auth.localStorageUser.token}/${auth.localStorageUser.id}`, {
-    //       params: {
-    //         dataType: 'JSON'
-    //       }
-    //     });
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
-
     return auth.localStorageUser ? (
         <>
             <h2>Users</h2>
-            {users && users.map((user) => (
-                <p key={user} >
-                    {user}
-                </p>
-            ))}
+            <UsersContainer />
 
             <h2>Messages</h2>
             {messages && messages.map((message) => (
