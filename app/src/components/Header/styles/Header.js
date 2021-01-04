@@ -5,6 +5,8 @@ export const HeaderWrapper = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  position: fixed;
 `;
 
 export const BrandWrapper = styled.div`
