@@ -3,6 +3,7 @@ import { useLocalStorage } from './use-local-storage';
 import axios from 'axios';
 
 const authContext = createContext();
+export const apiURL = 'http://greenvelvet.alwaysdata.net/kwick/api';
 
 export function ProvideAuth({ children }) {
     const auth = useProvideAuth();
@@ -17,8 +18,6 @@ export function ProvideAuth({ children }) {
     const [user, setUser] = useState(null);
     const [localStorageUser, setLocalStorageUser] = useLocalStorage('user', user);
 
-    const apiURL = 'http://greenvelvet.alwaysdata.net/kwick/api';
-
     async function signin(username, password) {
         try {
           const response = await axios.get(`${apiURL}/login/${username}/${password}`,{
@@ -26,13 +25,13 @@ export function ProvideAuth({ children }) {
               dataType: 'JSON'
             }
           });
-          setUser({
+          setLocalStorageUser({
               username: username,
               password: password,
-              token: response.data.result.token
+              token: response.data.result.token,
+              id: response.data.result.id
           })
-          setLocalStorageUser(user)
-          console.log(response.data);
+          setUser(localStorageUser);
         } catch (error) {
           console.error(error);
         }
@@ -45,50 +44,28 @@ export function ProvideAuth({ children }) {
               dataType: 'JSON'
             }
           });
-          setUser({
+          setLocalStorageUser({
               username: username,
               password: password,
-              token: response.data.result.token
+              token: response.data.result.token,
+              id: response.data.result.id
           })
-          setLocalStorageUser(user)
-          console.log(response.data);
+          setUser(localStorageUser);
         } catch (error) {
           console.error(error);
         }
       }
 
-    // const signout = () => {
-    //   return firebase
-    //     .auth()
-    //     .signOut()
-    //     .then(() => {
-    //       setUser(false);
-    //     });
-    // };
-  
-  
-    // Subscribe to user on mount
-    // Because this sets state in the callback it will cause any ...
-    // ... component that utilizes this hook to re-render with the ...
-    // ... latest auth object.
-    // useEffect(() => {
-    //   const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-    //     if (user) {
-    //       setUser(user);
-    //     } else {
-    //       setUser(false);
-    //     }
-    //   });
-  
-    //   // Cleanup subscription on unmount
-    //   return () => unsubscribe();
-    // }, []);
+      function signout() {
+        setLocalStorageUser(null);
+      }
     
     // Return the user object and auth methods
     return {
-      user,
+      apiURL,
       localStorageUser,
       signin,
       signup,
+      signout
     };
   }
