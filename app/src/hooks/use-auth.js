@@ -1,8 +1,9 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import { useLocalStorage } from './use-local-storage';
 import axios from 'axios';
 
 const authContext = createContext();
+export const apiURL = 'http://greenvelvet.alwaysdata.net/kwick/api';
 
 export function ProvideAuth({ children }) {
     const auth = useProvideAuth();
@@ -17,8 +18,6 @@ export function ProvideAuth({ children }) {
     const [user, setUser] = useState(null);
     const [localStorageUser, setLocalStorageUser] = useLocalStorage('user', user);
 
-    const apiURL = 'http://greenvelvet.alwaysdata.net/kwick/api';
-
     async function signin(username, password) {
         try {
           const response = await axios.get(`${apiURL}/login/${username}/${password}`,{
@@ -29,7 +28,8 @@ export function ProvideAuth({ children }) {
           setUser({
               username: username,
               password: password,
-              token: response.data.result.token
+              token: response.data.result.token,
+              id: response.data.result.id
           })
           setLocalStorageUser(user)
           console.log(response.data);
@@ -48,7 +48,8 @@ export function ProvideAuth({ children }) {
           setUser({
               username: username,
               password: password,
-              token: response.data.result.token
+              token: response.data.result.token,
+              id: response.data.result.id
           })
           setLocalStorageUser(user)
           console.log(response.data);
@@ -56,6 +57,20 @@ export function ProvideAuth({ children }) {
           console.error(error);
         }
       }
+
+    function signout(token, userID) {
+      try {
+        axios.get(`${apiURL}/logout/${token}/${userID}`, {
+          params: {
+            dataType: 'JSON'
+          }
+        });
+        setUser(null);
+        setLocalStorageUser(user);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
     // const signout = () => {
     //   return firebase
@@ -65,30 +80,30 @@ export function ProvideAuth({ children }) {
     //       setUser(false);
     //     });
     // };
-  
-  
+
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...
     // ... latest auth object.
-    // useEffect(() => {
-    //   const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-    //     if (user) {
-    //       setUser(user);
-    //     } else {
-    //       setUser(false);
-    //     }
-    //   });
-  
+    useEffect(() => {
+      const unsubscribe = (user) => {
+        if (user) {
+          setUser(user);
+        } else {
+          setUser(false);
+        }
+      };
     //   // Cleanup subscription on unmount
-    //   return () => unsubscribe();
-    // }, []);
+      return () => unsubscribe();
+    }, []);
     
     // Return the user object and auth methods
     return {
+      apiURL,
       user,
       localStorageUser,
       signin,
       signup,
+      signout
     };
   }
