@@ -1,20 +1,33 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import { ProvideAuth } from './hooks/use-auth';
 
-import { Signup } from './pages';
+import { Signup, Signin } from './pages';
 
 function App() {
 
   return (
     <ProvideAuth>
       <Router>
-          <Switch>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-          </Switch>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/signup">Sign up</Link>
+            </li>
+            <li>
+              <Link to="/signin">Sign in</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/signin">
+            <Signin />
+          </Route>
+        </Switch>
       </Router>
     </ProvideAuth>
   );
