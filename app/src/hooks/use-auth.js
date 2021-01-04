@@ -32,8 +32,6 @@ export function ProvideAuth({ children }) {
               id: response.data.result.id
           })
           setUser(localStorageUser);
-          console.log(response.data);
-          console.log(localStorageUser);
         } catch (error) {
           console.error(error);
         }
@@ -53,7 +51,6 @@ export function ProvideAuth({ children }) {
               id: response.data.result.id
           })
           setUser(localStorageUser);
-          console.log(response.data);
         } catch (error) {
           console.error(error);
         }
