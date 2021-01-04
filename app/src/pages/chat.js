@@ -4,14 +4,13 @@ import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
 
-import { UsersContainer, MessagesContainer, NavigationContainer } from '../containers';
+import { UsersContainer, MessagesContainer } from '../containers';
 
 export default function Chat() {
     const auth = useAuth();
 
     return auth.localStorageUser ? (
         <>
-            <NavigationContainer />
             <h2>Users</h2>
             <UsersContainer />
             <h2>Messages</h2>
