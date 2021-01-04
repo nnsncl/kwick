@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useContext, createContext } from "react";
 import { useLocalStorage } from './use-local-storage';
 import axios from 'axios';
 
@@ -15,21 +15,27 @@ export function ProvideAuth({ children }) {
 
   function useProvideAuth() {
     const [user, setUser] = useState(null);
-    const [localStorageUser, setLocalStorageUser] = useLocalStorage()
+    const [localStorageUser, setLocalStorageUser] = useLocalStorage();
 
     const apiURL = 'http://greenvelvet.alwaysdata.net/kwick/api';
 
-    // Wrap any Firebase methods we want to use making sure ...
-    // ... to save the user to state.
-    // const signin = (email, password) => {
-    //   return firebase
-    //     .auth()
-    //     .signInWithEmailAndPassword(email, password)
-    //     .then(response => {
-    //       setUser(response.user);
-    //       return response.user;
-    //     });
-    // };
+    async function signin(username, password) {
+        try {
+          const response = await axios.get(`${apiURL}/login/${username}/${password}`,{
+            params: {
+              dataType: 'JSON'
+            }
+          });
+          setUser({
+              username: username,
+              password: password
+          })
+          setLocalStorageUser(user)
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+      }
 
     async function signup(username, password) {
         try {
@@ -49,17 +55,7 @@ export function ProvideAuth({ children }) {
           console.error(error);
         }
       }
-  
-    // const signup = (email, password) => {
-    //   return firebase
-    //     .auth()
-    //     .createUserWithEmailAndPassword(email, password)
-    //     .then(response => {
-    //       setUser(response.user);
-    //       return response.user;
-    //     });
-    // };
-  
+
     // const signout = () => {
     //   return firebase
     //     .auth()
@@ -91,8 +87,7 @@ export function ProvideAuth({ children }) {
     return {
       user,
       localStorageUser,
-    //   signin,
+      signin,
       signup,
-
     };
   }
