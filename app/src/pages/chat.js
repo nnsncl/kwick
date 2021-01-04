@@ -11,8 +11,20 @@ export default function Chat() {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
 
-    console.log(auth.localStorageUser);
-    console.log(auth);
+    async function getMessages() {
+        try {
+            const response = await axios.get(`${auth.apiURL}/talk/list/${auth.localStorageUser.token}/0`);
+            setMessages(response.data.result.talk);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getMessages();
+        //eslint-disable-next-line
+    }, [])
 
     useEffect(() => {
         async function getLoggedUsers() {
@@ -28,22 +40,8 @@ export default function Chat() {
         //eslint-disable-next-line 
     }, [])
 
-    useEffect(() => {
-        async function getMessages() {
-            try {
-                const response = await axios.get(`${auth.apiURL}/talk/list/${auth.localStorageUser.token}/0`);
-                setMessages(response.data.result.talk);
-
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getMessages();
-        //eslint-disable-next-line
-    }, [])
-
-
-    const handlePostMessage = () => {
+    const handlePostMessage = (e) => {
+        e.preventDefault();
         async function sendMessage() {
             try {
                 await axios.get(`${auth.apiURL}/say/${auth.localStorageUser.token}/${auth.localStorageUser.id}/${message}`);
@@ -52,6 +50,8 @@ export default function Chat() {
             }
         }
         sendMessage();
+        setMessage('');
+        getMessages();
     }
 
 
