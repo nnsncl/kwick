@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useContext, createContext } from "react";
 import { useLocalStorage } from './use-local-storage';
 import axios from 'axios';
 
@@ -25,14 +25,15 @@ export function ProvideAuth({ children }) {
               dataType: 'JSON'
             }
           });
-          setUser({
+          setLocalStorageUser({
               username: username,
               password: password,
               token: response.data.result.token,
               id: response.data.result.id
           })
-          setLocalStorageUser(user)
+          setUser(localStorageUser);
           console.log(response.data);
+          console.log(localStorageUser);
         } catch (error) {
           console.error(error);
         }
@@ -45,62 +46,26 @@ export function ProvideAuth({ children }) {
               dataType: 'JSON'
             }
           });
-          setUser({
+          setLocalStorageUser({
               username: username,
               password: password,
               token: response.data.result.token,
               id: response.data.result.id
           })
-          setLocalStorageUser(user)
+          setUser(localStorageUser);
           console.log(response.data);
         } catch (error) {
           console.error(error);
         }
       }
 
-    function signout(token, userID) {
-      try {
-        axios.get(`${apiURL}/logout/${token}/${userID}`, {
-          params: {
-            dataType: 'JSON'
-          }
-        });
-        setUser(null);
-        setLocalStorageUser(user);
-      } catch (error) {
-        console.error(error);
+      function signout() {
+        setLocalStorageUser(null);
       }
-    }
-
-    // const signout = () => {
-    //   return firebase
-    //     .auth()
-    //     .signOut()
-    //     .then(() => {
-    //       setUser(false);
-    //     });
-    // };
-
-    // Subscribe to user on mount
-    // Because this sets state in the callback it will cause any ...
-    // ... component that utilizes this hook to re-render with the ...
-    // ... latest auth object.
-    useEffect(() => {
-      const unsubscribe = (user) => {
-        if (user) {
-          setUser(user);
-        } else {
-          setUser(false);
-        }
-      };
-    //   // Cleanup subscription on unmount
-      return () => unsubscribe();
-    }, []);
     
     // Return the user object and auth methods
     return {
       apiURL,
-      user,
       localStorageUser,
       signin,
       signup,

@@ -55,6 +55,18 @@ export default function Chat() {
     }
 
 
+    // const signout = () => {
+    //   try {
+    //     axios.get(`${auth.apiURL}/logout/${auth.localStorageUser.token}/${auth.localStorageUser.id}`, {
+    //       params: {
+    //         dataType: 'JSON'
+    //       }
+    //     });
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+
     return auth.localStorageUser ? (
         <>
             <h2>Users</h2>
@@ -83,6 +95,12 @@ export default function Chat() {
                 <button type='submit' >Send</button>
             </form>
 
+            <div>
+                <button onClick={() => {
+                    axios.get(`${auth.apiURL}/logout/${auth.localStorageUser.token}/${auth.localStorageUser.id}`);
+                    auth.signout();
+                }} >Sign out</button>
+            </div>
         </>
     ) : (<Redirect to="/signin" />);
 }
