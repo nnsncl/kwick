@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Frame, Item } from './styles/AnimatedTitle'
 
 const container = {
-    hidden: { opacity: 1 },
+    hidden: { opacity: 0 },
     visible: {
         opacity: 1,
         transition: {
@@ -14,19 +14,19 @@ const container = {
 
 const item = {
     hidden: {
-        y: "130%",
-        skewY: "13deg",
+        y: "113%",
+        skewY: "36deg",
+        transformOrigin: 'left bottom'
     },
     visible: {
         y: "0%",
         skewY: "0deg",
         transition: {
             type: "spring",
-            stiffness: 68,
-            damping: 13,
-            mass: 1.5,
-            ease: "anticipate",
-            duration: 1.3,
+            stiffness: 74,
+            damping: 16,
+            mass: 1.9,
+            ease: "anticipate"
         }
     }
 };
