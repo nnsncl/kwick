@@ -51,7 +51,7 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 62.5%;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background: #fafafa;
+        background: #f5f3f4;
         color: #111;
         ${'' /* background: #f5f3f4; */}
     }
@@ -65,5 +65,10 @@ export const GlobalStyles = createGlobalStyle`
         margin-bottom: 9px;
     }
 
+    a {
+        color: blue;
+        text-decoration: none;
+        font-weight: 600;
+    }
 
 `;
