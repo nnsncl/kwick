@@ -1,30 +1,38 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 
-export default function Signup(){
-    const [username, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    
+import { useAuth } from '../hooks/use-auth';
 
-    async function signUp() {
-        try {
-          const response = await axios.get(`http://greenvelvet.alwaysdata.net/kwick/api/signup/${username}/${password}`,{
-            params: {
-              dataType: 'JSON'
-            }
-          });
-          console.log(response);
-        } catch (error) {
-          console.error(error);
-        }
-      }
+export default function Signup() {
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
+  const auth = useAuth();
 
-    return (
-        <form onSubmit={e => e.preventDefault()} >  
-        <input type='text' defaultValue='' placeholder="username"  onChange={e => setUserName(e.target.value)} />
-        <input type='password' defaultValue='' placeholder="password"  onChange={e => setPassword(e.target.value)} />
-        <button type='submit' onClick={signUp} >submit</button>
+  const handleSignup = (e) => {
+    e.preventDefault()
+    auth.signup(username, password)
+    console.log(auth.user)
+  }
+
+  useEffect(() => {
+    console.log(auth.localStorageUser)
+  }, [])
+
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/signup">Sign up</Link>
+          </li>
+        </ul>
+      </nav>
+      <form onSubmit={handleSignup} >
+        <input type='text' defaultValue='' placeholder="username" onChange={e => setUserName(e.target.value)} />
+        <input type='password' defaultValue='' placeholder="password" onChange={e => setPassword(e.target.value)} />
+        <button type='submit' onClick={handleSignup} >submit</button>
       </form>
-    )
+    </>
+  )
 }
