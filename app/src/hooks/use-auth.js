@@ -15,7 +15,7 @@ export function ProvideAuth({ children }) {
 
   function useProvideAuth() {
     const [user, setUser] = useState(null);
-    const [localStorageUser, setLocalStorageUser] = useLocalStorage();
+    const [localStorageUser, setLocalStorageUser] = useLocalStorage('user', user);
 
     const apiURL = 'http://greenvelvet.alwaysdata.net/kwick/api';
 
@@ -28,10 +28,11 @@ export function ProvideAuth({ children }) {
           });
           setUser({
               username: username,
-              password: password
+              password: password,
+              token: response.data.result.token
           })
           setLocalStorageUser(user)
-          console.log(response);
+          console.log(response.data);
         } catch (error) {
           console.error(error);
         }
@@ -46,11 +47,11 @@ export function ProvideAuth({ children }) {
           });
           setUser({
               username: username,
-              password: password
+              password: password,
+              token: response.data.result.token
           })
           setLocalStorageUser(user)
-
-          console.log(response);
+          console.log(response.data);
         } catch (error) {
           console.error(error);
         }
