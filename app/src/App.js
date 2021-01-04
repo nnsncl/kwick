@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import { ProvideAuth } from './hooks/use-auth';
 
-import { Signup, Signin } from './pages';
+import { Signup, Signin, Chat } from './pages';
 
 function App() {
 
@@ -26,6 +26,9 @@ function App() {
           </Route>
           <Route exact path="/signin">
             <Signin />
+          </Route>
+          <Route exact path="/chat">
+            <Chat />
           </Route>
         </Switch>
       </Router>
