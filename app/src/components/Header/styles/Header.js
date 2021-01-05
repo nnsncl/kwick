@@ -8,6 +8,7 @@ export const HeaderWrapper = styled(motion.nav)`
   justify-content: space-between;
   width: 100%;
   position: fixed;
+  z-index: 999;
 `;
 
 export const BrandWrapper = styled.div`

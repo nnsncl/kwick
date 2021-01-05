@@ -3,9 +3,11 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useAuth } from '../hooks/use-auth';
+import { getTimestamp } from '../utils/get-timestamp';
 
 import { Typography, Button } from '../components';
 import { Container, Frame, BoldBody, Wrapper, ChatInput, ItemContainer } from './styles/Messages';
+
 export default function MessagesContainer() {
     const auth = useAuth();
 
@@ -14,18 +16,6 @@ export default function MessagesContainer() {
 
     const lastMessageRef = useRef();
 
-    const scrollToLastMessage = () => {
-        lastMessageRef.current.scrollIntoView({
-            behavior: "smooth",
-        });
-    }
-
-    useEffect(() => {
-        if (messages) {
-            scrollToLastMessage()
-        }
-    },[messages])
-    
     async function getMessages() {
         try {
             const response = await axios.get(`${auth.apiURL}/talk/list/${auth.localStorageUser.token}/0`);
@@ -41,6 +31,17 @@ export default function MessagesContainer() {
         //eslint-disable-next-line
     }, [])
 
+    useEffect(() => {
+        const scrollToLastMessage = () => {
+            lastMessageRef.current.scrollIntoView({
+                behavior: "smooth",
+            });
+        }
+        if (messages) {
+            scrollToLastMessage()
+        }
+    }, [messages])
+
     const handlePostMessage = (e) => {
         e.preventDefault();
         async function sendMessage() {
@@ -55,8 +56,32 @@ export default function MessagesContainer() {
         getMessages();
     }
 
+    const container = {
+        hidden: {
+            opacity: 0,
+            height: '0vh'
+        },
+        visible: {
+            opacity: 1,
+            height: '95vh',
+            transition: {
+                type: "spring",
+                stiffness: 74,
+                damping: 16,
+                mass: 1.9,
+                ease: "anticipate"
+            },
+        }
+    };
+
+    let ts = new Date();
+    console.log(ts)
     return (
-        <Container>
+        <Container
+            variants={container}
+            initial="hidden"
+            animate={"visible"}
+        >
             {messages && messages.map((message) => (
                 <Frame
                     key={uuidv4()}
@@ -65,12 +90,16 @@ export default function MessagesContainer() {
                     <Wrapper variant={`${message.user_name === auth.localStorageUser.username ? 'current' : ''}`} >
                         <Typography.Body>{message.content}</Typography.Body>
                     </Wrapper>
-                    <Typography.BodySmall>{message.timestamp}</Typography.BodySmall>
+                    <Typography.BodySmall>{getTimestamp(message.timestamp)}</Typography.BodySmall>
                 </Frame>
             ))}
             <div ref={lastMessageRef} />
 
-            <ChatInput onSubmit={handlePostMessage} >
+            <ChatInput
+                variants={container}
+                initial="hidden"
+                animate={"visible"}
+                onSubmit={handlePostMessage} >
                 <input
                     placeholder="Send a message"
                     value={message ? message : ''}

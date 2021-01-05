@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { Typography } from '../../components';
 
+import { motion } from 'framer-motion';
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,7 +14,7 @@ export const Container = styled.div`
     overflow: scroll;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
     border-radius: 0 16px 16px 16px;
     padding: 1.9rem 2.3rem;
     width: fit-content;
@@ -22,7 +23,7 @@ export const Wrapper = styled.div`
     margin-bottom: 0.9rem;
 
     ${(props) => props.variant === 'current'
-        ? (` background: green;
+        ? (` background: #52b788;
              color: white;
              border-radius: 2.3rem 0 2.3rem 0;
              `)
@@ -50,7 +51,7 @@ export const BoldBody = styled(Typography.BodySmall)`
 `;
 
 
-export const ChatInput = styled.form`
+export const ChatInput = styled(motion.form)`
     position: sticky;
     bottom: 0;
     padding: 3.6rem 2.3rem;
