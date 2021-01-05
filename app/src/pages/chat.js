@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
 
 import { UsersContainer, MessagesContainer } from '../containers';
-import { Layout, Button, Navigation } from '../components';
+import { Layout, Button, Navigation, Modal } from '../components';
 
 export default function Chat() {
     const auth = useAuth();
+    const [toggleUsersModal, setToggleUsersModal] = useState(false);
 
     return auth.localStorageUser ? (
         <>
+            <Modal
+                title="Online users"
+                toggleModal={toggleUsersModal}
+                setToggleModal={setToggleUsersModal}
+            >
+                <UsersContainer />
+            </Modal>
             <Navigation>
+                <Button.Small onClick={() => setToggleUsersModal(!toggleUsersModal)}  >
+                    <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
+                        <path opacity="0.3" d="M24 22C19.5817 22 16 18.4183 16 14C16 9.58172 19.5817 6 24 6C28.4183 6 32 9.58172 32 14C32 18.4183 28.4183 22 24 22Z" fill="#111" />
+                        <path d="M6.0013 40.3984C6.77652 30.853 14.5238 26 23.9667 26C33.5424 26 41.4098 30.5864 41.9958 40.4C42.0192 40.7909 41.9958 42 40.4934 42C33.0822 42 22.0694 42 7.455 42C6.95342 42 5.95908 40.9184 6.0013 40.3984Z" fill="#111" />
+                    </svg>
+                </Button.Small>
                 <Button.Small onClick={() => {
                     axios.get(`${auth.apiURL}/logout/${auth.localStorageUser.token}/${auth.localStorageUser.id}`);
                     auth.signout();
@@ -26,7 +40,7 @@ export default function Chat() {
             <Layout maxFreezeSmall >
                 <Layout.Row stretchContent >
                     <Layout.Col size='1' >
-                        {/* <UsersContainer /> */}
+
                         <MessagesContainer />
                     </Layout.Col>
                 </Layout.Row>

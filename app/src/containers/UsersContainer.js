@@ -3,16 +3,14 @@ import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
 
-import { Typography } from '../components';
+import { Typography, Label, Avatar } from '../components';
 
 import styled from 'styled-components';
 
-
-const Container = styled.aside`
-    background: red;
-    padding: 2.3rem;
-    border-radius: 16px;
+const Container = styled.div`
     width: 100%;
+    max-height: 86vh;
+    overflow: scroll;
 `;
 const Frame = styled.div`
     :first-of-type{
@@ -20,10 +18,17 @@ const Frame = styled.div`
     }
     padding: 2.3rem 0;
     display: flex;
+    justify-content: space-between;
     flex: 1;
-    border-bottom: 1px solid #D8D8D8;
 `;
-const Footer = styled.footer``;
+const Item = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+        margin-left: 1.3rem;
+    }
+`;
 
 export default function UsersContainer() {
     const auth = useAuth();
@@ -48,9 +53,13 @@ export default function UsersContainer() {
             { users
                 && users.map((user) => (
                     <Frame key={user}>
-                        <Typography.Body>
-                            {user}
-                        </Typography.Body>
+                        <Item>
+                            <Avatar>{user.slice(0, 1)}</Avatar>
+                            <Typography.Body>
+                                <b>{user}</b>
+                            </Typography.Body>
+                        </Item>
+                        <Label>online</Label>
                     </Frame>
                 ))}
         </Container>
