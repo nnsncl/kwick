@@ -54,7 +54,7 @@ export default function Signin() {
                   onChange={e => setPassword(e.target.value)}
                   style={{ marginBottom: '1.3rem' }}
                 />
-                <Typography.BodySmall>Don't have an account? <Link to='/signup'>Sign up</Link></Typography.BodySmall>
+                <Typography.BodySmall>Don't have an account? <Link to='/'>Sign up</Link></Typography.BodySmall>
               </motion.div>
               <Button.Action type='submit' onClick={handleSignin} >Sign In</Button.Action>
             </motion.form>
