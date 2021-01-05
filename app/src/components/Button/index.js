@@ -3,12 +3,20 @@ import { Container, Action } from './styles/Button'
 
 export default function Button({ children, ...restProps }) {
     return (
-        <Container {...restProps} >
+        <Container
+            whileHover={{ scale: 1.1 }}
+            {...restProps} >
             {children}
         </Container>
     )
 }
 
 Button.Action = function ButtonAction({ children, ...restProps }) {
-    return <Action {...restProps}>{children}</Action>
+    return (
+        <Action
+            whileHover={{ scale: 0.95 }}
+            {...restProps}>
+            {children}
+        </Action>
+    )
 }

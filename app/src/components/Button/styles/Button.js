@@ -1,6 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const Container = styled.button`
+export const Container = styled(motion.button)`
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -24,7 +25,7 @@ export const Container = styled.button`
     `)}
 `;
 
-export const Action = styled.button`
+export const Action = styled(motion.button)`
     font-size: 1.6rem;
     padding: 1.9rem 3.6rem;
     border-radius: .9rem;
@@ -35,6 +36,7 @@ export const Action = styled.button`
     color: #f5f3f4;
     text-decoration: none;
     outline: none;
+    font-weight: bold;
 
     :disabled{
         border: none;
