@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
@@ -93,6 +93,20 @@ export default function MessagesContainer() {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
 
+    const lastMessageRef = useRef();
+
+    const scrollToLastMessage = () => {
+        lastMessageRef.current.scrollIntoView({
+            behavior: "smooth",
+        });
+    }
+
+    useEffect(() => {
+        if (messages) {
+            scrollToLastMessage()
+        }
+    },[messages])
+    
     async function getMessages() {
         try {
             const response = await axios.get(`${auth.apiURL}/talk/list/${auth.localStorageUser.token}/0`);
@@ -135,6 +149,7 @@ export default function MessagesContainer() {
                     <Typography.BodySmall>{message.timestamp}</Typography.BodySmall>
                 </Frame>
             ))}
+            <div ref={lastMessageRef} />
 
             <ChatInput onSubmit={handlePostMessage} >
                 <input
