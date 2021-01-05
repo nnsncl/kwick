@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { useAuth } from '../hooks/use-auth';
 import { Navigation, Layout, AnimatedTitle, Typography, Input, Button } from '../components';
@@ -19,6 +19,7 @@ export default function Signup() {
 
   return (
     <>
+      { auth.localStorageUser && <Redirect to="/chat" /> }
       <Navigation />
       <Layout maxFreezeLarge >
         <Layout.Row alignCenter hasPadding rowReverse h100 >
