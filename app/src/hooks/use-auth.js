@@ -27,7 +27,6 @@ export function ProvideAuth({ children }) {
           });
           setLocalStorageUser({
               username: username,
-              password: password,
               token: response.data.result.token,
               id: response.data.result.id
           })
@@ -46,7 +45,6 @@ export function ProvideAuth({ children }) {
           });
           setLocalStorageUser({
               username: username,
-              password: password,
               token: response.data.result.token,
               id: response.data.result.id
           })
