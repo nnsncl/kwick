@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import { Navigation, Layout, AnimatedTitle, Typography, Input, Button } from '../components';
 
+import { motion } from 'framer-motion';
+
 export default function Signup() {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -22,9 +24,18 @@ export default function Signup() {
         <Layout.Row alignCenter hasPadding rowReverse h100 >
           <Layout.Col size='1'>
             <AnimatedTitle>Real-time Team Collaboration</AnimatedTitle>
-            <Typography.BodyLarge>Sign up to get started.</Typography.BodyLarge>
-            <form style={{ margin: '2.3rem 0' }} onSubmit={handleSignup} >
-              <div style={{ marginBottom: '3.6rem' }} >
+
+            <motion.form
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "easeOut", duration: 1, delay: 0.3 }}
+              style={{ margin: '2.3rem 0' }}
+              onSubmit={handleSignup} >
+              <Typography.BodyLarge>Sign up to get started.</Typography.BodyLarge>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                style={{ margin: '3.6rem 0rem' }} >
                 <Input
                   label="Username"
                   name='username'
@@ -43,12 +54,18 @@ export default function Signup() {
                   style={{ marginBottom: '1.3rem' }}
                 />
                 <Typography.BodySmall>Already have an account? <Link to='/signin'>Sign in</Link></Typography.BodySmall>
-              </div>
+              </motion.div>
               <Button.Action type='submit' onClick={handleSignup} >Sign Up</Button.Action>
-            </form>
+            </motion.form>
           </Layout.Col>
           <Layout.Col size='2'>
-            <img width="100%" src="/SignUp.png" alt="sign up" />
+            <motion.img
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "easeOut", duration: 1 }}
+              width="100%"
+              src="/SignUp.png"
+              alt="sign up" />
           </Layout.Col>
         </Layout.Row>
       </Layout>
