@@ -24,7 +24,7 @@ export const Row = styled.div`
     flex-wrap: wrap;
 
     ${(restProps) => restProps.rowReverse && (`
-        @media(max-width: 1056px) {
+        @media(max-width: 1241px) {
             flex-direction: column-reverse; 
         }
     `)}
@@ -52,7 +52,7 @@ export const Row = styled.div`
     `)}
 
     ${(restProps) => restProps.hasPadding && (`
-        padding: 3vh 0;
+        padding: 5.6rem 0;
     `)}
     ${(restProps) => restProps.hasPaddingLg && (`
         padding: 33vh 0;
