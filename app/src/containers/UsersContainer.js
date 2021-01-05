@@ -3,6 +3,29 @@ import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
 
+import { Typography } from '../components';
+
+import styled from 'styled-components';
+
+
+const Container = styled.aside`
+    background: red;
+    padding: 2.3rem;
+    border-radius: 16px;
+    width: 100%;
+    height: 80%;
+`;
+const Frame = styled.div`
+    :first-of-type{
+        padding: 0 0 2.3rem 0;
+    }
+    padding: 2.3rem 0;
+    display: flex;
+    flex: 1;
+    border-bottom: 1px solid #D8D8D8;
+`;
+const Footer = styled.footer``;
+
 export default function UsersContainer() {
     const auth = useAuth();
     const [users, setUsers] = useState([]);
@@ -22,13 +45,15 @@ export default function UsersContainer() {
     }, [])
 
     return (
-        <>
+        <Container>
             { users
                 && users.map((user) => (
-                    <p key={user} >
-                        {user}
-                    </p>
+                    <Frame key={user}>
+                        <Typography.Body>
+                            {user}
+                        </Typography.Body>
+                    </Frame>
                 ))}
-        </>
+        </Container>
     )
 }
