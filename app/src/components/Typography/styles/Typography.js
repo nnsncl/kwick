@@ -54,11 +54,10 @@ export const TitleH6 = styled.h6`
 export const BodyLarge = styled.p`
     font-size: 2.3rem;
     line-height: 1.5em;
-    
-     margin-bottom: ${(restProps) => restProps.hasMarginBottom
-        ? ` 3.6rem;`
-        : ` 2.3rem;`
-    };
+    @media(max-width: 1024px){
+        font-size: 1.9rem;
+        line-height: 1em;
+    }
 `;
 export const Body = styled.p`
     font-size: 1.9rem;
