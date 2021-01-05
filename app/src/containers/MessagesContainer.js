@@ -13,7 +13,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background: white;
-    padding: 3.6rem 2.3rem;
+    padding: 3.6rem 2.3rem 1.3rem 2.3rem;
     border-radius: 16px;
     max-height: 95vh;
     overflow: scroll;
@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
     border-radius: 0 16px 16px 16px;
-    padding: 1.9rem;
+    padding: 1.9rem 2.3rem;
     width: fit-content;
     max-width: 66.6%;
     word-break: break-word;
@@ -58,7 +58,7 @@ const BoldBody = styled(Typography.BodySmall)`
 
 const ChatInput = styled.form`
     position: sticky;
-    bottom: -1vh;
+    bottom: 0;
     padding: 3.6rem 2.3rem;
     border-radius: 1.6rem;
     background: white;

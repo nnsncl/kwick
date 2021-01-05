@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Action } from './styles/Button'
+import { Container, Action, Small } from './styles/Button'
 
 export default function Button({ children, ...restProps }) {
     return (
@@ -18,5 +18,14 @@ Button.Action = function ButtonAction({ children, ...restProps }) {
             {...restProps}>
             {children}
         </Action>
+    )
+}
+Button.Small = function ButtonSmall({ children, ...restProps }) {
+    return (
+        <Small
+            whileHover={{ scale: 0.95 }}
+            {...restProps}>
+            {children}
+        </Small>
     )
 }

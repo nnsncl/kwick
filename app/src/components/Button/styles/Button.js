@@ -55,3 +55,33 @@ export const Action = styled(motion.button)`
     }
 `;
 
+export const Small = styled(motion.button)`
+    font-size: 1.6rem;
+    padding: 1.9rem;
+    border-radius: .9rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: ease-out .2s;
+    color: #111;
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+
+    :disabled{
+        border: none;
+        background: #D8D8D8;
+        color: grey;
+    }
+    
+    &:hover{
+        background: none;
+        :disabled{
+            border: none;
+            background: #D8D8D8;
+            cursor: not-allowed;
+            color: grey;
+        }
+    }
+`;
+
