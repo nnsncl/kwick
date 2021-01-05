@@ -15,6 +15,9 @@ export const Container = styled.section`
     ${(restProps) => restProps.maxFreeze && (`
        max-width: 1440px;
     `)}
+    ${(restProps) => restProps.maxFreezeSmall && (`
+       max-width: 1024px;
+    `)}
 
     margin: 0 auto;
 `;

@@ -13,7 +13,6 @@ const Container = styled.aside`
     padding: 2.3rem;
     border-radius: 16px;
     width: 100%;
-    height: 80%;
 `;
 const Frame = styled.div`
     :first-of-type{
