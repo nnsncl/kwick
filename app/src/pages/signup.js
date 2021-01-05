@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '../hooks/use-auth';
-import { Navigation, Layout, AnimatedTitle, Typography } from '../components';
+import { Navigation, Layout, AnimatedTitle, Typography, Input, Button } from '../components';
 
 export default function Signup() {
   const [username, setUserName] = useState('');
@@ -23,12 +23,33 @@ export default function Signup() {
           <Layout.Col size='1'>
             <AnimatedTitle>Real-time Team Collaboration</AnimatedTitle>
             <Typography.BodyLarge>Sign up to get started.</Typography.BodyLarge>
-            <form onSubmit={handleSignup} >
-              <input type='text' defaultValue='' placeholder="username" onChange={e => setUserName(e.target.value)} />
-              <input type='password' defaultValue='' placeholder="password" onChange={e => setPassword(e.target.value)} />
-              <button type='submit' onClick={handleSignup} >submit</button>
+            <form style={{ margin: '2.3rem 0' }} onSubmit={handleSignup} >
+
+               <div style={{ marginBottom: '3.6rem' }} >
+               <Input
+                label="Username"
+                name='username'
+                type='text'
+                defaultValue=''
+                placeholder="Username"
+                onChange={e => setUserName(e.target.value)}
+               />
+              <Input
+                label="Password"
+                name='password'
+                type='password'
+                defaultValue=''
+                placeholder="••••••••"
+                onChange={e => setPassword(e.target.value)}
+               />
+               </div>
+               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
+               <Button.Action type='submit' onClick={handleSignup} >Sign up</Button.Action>
+               <Typography.BodySmall>Already have an account? <Link to='/signin'>Sign in</Link></Typography.BodySmall>
+               </div>
+
             </form>
-            <Typography.BodySmall>Already have an account? <Link to='/signin'>Sign in</Link></Typography.BodySmall>
+
           </Layout.Col>
           <Layout.Col size='2'>
             <img width="100%" src="/SignUp.png" alt="sign up" />

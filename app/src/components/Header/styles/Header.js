@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.nav`
-  padding: 1rem 1.3rem;
+  padding: 3.6rem 2.3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
