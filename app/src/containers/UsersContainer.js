@@ -4,31 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../hooks/use-auth';
 
 import { Typography, Label, Avatar } from '../components';
-
-import styled from 'styled-components';
-
-const Container = styled.div`
-    width: 100%;
-    max-height: 86vh;
-    overflow: scroll;
-`;
-const Frame = styled.div`
-    :first-of-type{
-        padding: 0 0 2.3rem 0;
-    }
-    padding: 2.3rem 0;
-    display: flex;
-    justify-content: space-between;
-    flex: 1;
-`;
-const Item = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    p {
-        margin-left: 1.3rem;
-    }
-`;
+import { Container, Frame, Item } from './styles/Users';
 
 export default function UsersContainer() {
     const auth = useAuth();
