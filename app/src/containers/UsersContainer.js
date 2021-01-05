@@ -3,6 +3,9 @@ import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
 
+import { Typography, Label, Avatar } from '../components';
+import { Container, Frame, Item } from './styles/Users';
+
 export default function UsersContainer() {
     const auth = useAuth();
     const [users, setUsers] = useState([]);
@@ -22,13 +25,19 @@ export default function UsersContainer() {
     }, [])
 
     return (
-        <>
+        <Container>
             { users
                 && users.map((user) => (
-                    <p key={user} >
-                        {user}
-                    </p>
+                    <Frame key={user}>
+                        <Item>
+                            <Avatar>{user.slice(0, 1)}</Avatar>
+                            <Typography.Body>
+                                <b>{user}</b>
+                            </Typography.Body>
+                        </Item>
+                        <Label>online</Label>
+                    </Frame>
                 ))}
-        </>
+        </Container>
     )
 }
