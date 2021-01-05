@@ -11,7 +11,7 @@ function App() {
     <ProvideAuth>
       <Router>
         <Switch>
-          <Route exact path="/signup">
+          <Route exact path="/">
             <Signup />
           </Route>
           <Route exact path="/signin">
