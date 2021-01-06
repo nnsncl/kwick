@@ -44,6 +44,7 @@ export default function Signup() {
                 animate={{ opacity: 1 }}
                 style={{ margin: '3.6rem 0rem' }} >
                 <Input
+                  required
                   label="Username"
                   name='username'
                   type='text'
@@ -52,6 +53,7 @@ export default function Signup() {
                   onChange={e => setUserName(e.target.value)}
                 />
                 <Input
+                  required
                   label="Password"
                   name='password'
                   type='password'

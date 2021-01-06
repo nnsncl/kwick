@@ -45,6 +45,7 @@ export default function Signin() {
                 transition={{ type: "easeOut", duration: 1, delay: 0.3 }}
                 style={{ margin: '3.6rem 0rem' }} >
                 <Input
+                  required
                   error={auth.signinError}
                   label="Username"
                   name='username'
@@ -54,6 +55,7 @@ export default function Signin() {
                   onChange={e => setUserName(e.target.value)}
                 />
                 <Input
+                  required
                   error={auth.signinError}
                   label="Password"
                   name='password'

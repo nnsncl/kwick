@@ -26,6 +26,8 @@ function useProvideAuth() {
   const [signupError, setSignupError] = useState(null);
   const [signupErrorMessage, setSignupErrorMessage] = useState(null);
 
+  const [messages, setMessages] = useState([]);
+
   async function signin(username, password) {
     try {
       const response = await axios.get(`${apiURL}/login/${username}/${password}`, {
@@ -76,6 +78,17 @@ function useProvideAuth() {
     }
   }
 
+
+  async function getMessages() {
+    try {
+        const response = await axios.get(`${apiURL}/talk/list/${localStorageUser.token}/0`);
+        setMessages(response.data.result.talk);
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
   function signout() {
     setLocalStorageUser(null);
   }
@@ -90,6 +103,8 @@ function useProvideAuth() {
     signup,
     signupError,
     signupErrorMessage,
-    signout
+    signout,
+    messages,
+    getMessages,
   };
 }
