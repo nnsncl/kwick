@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
 
-import { Button, Typography } from '../components';
+import { Button } from '../components';
 import { ChatInput, ItemContainer, Counter } from './styles/Messages';
 import { container } from './styles/Animation';
 
