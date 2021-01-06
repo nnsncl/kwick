@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
 
-import { Button } from '../components';
+import { Button, Typography } from '../components';
 import { ChatInput, ItemContainer } from './styles/Messages';
 import { container } from './styles/Animation';
 
@@ -35,6 +35,7 @@ export default function ChatbarContainer() {
             initial="hidden"
             animate={"visible"}
             onSubmit={handlePostMessage} >
+            <Typography.BodySmall><b>{message.length}</b>/140</Typography.BodySmall>
             <input
                 maxLength='140'
                 placeholder="Send a message"
