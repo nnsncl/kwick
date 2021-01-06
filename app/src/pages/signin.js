@@ -75,7 +75,7 @@ export default function Signin() {
               transition={{ type: "easeOut", duration: 1 }}
               width="100%"
               src="/SignIn.png"
-              alt="sign ip" />
+              alt="sign in" />
           </Layout.Col>
         </Layout.Row>
       </Layout>
