@@ -15,11 +15,16 @@ export const Label = styled.label`
 export const Field = styled.input`
     background: white;
     border-radius: 9px;
-    border: 1px solid white;
     padding: 1.3rem 1.9rem;
     font-size: 1.6rem;
     outline: none;
     transition: all ease-out .2s;
+
+    ${(restProps) => restProps.error
+        ? (`border: 1px solid rgb(220, 47, 2);`)
+        : (`border: 1px solid white;`)
+    }
+
     ::placeholder{
         opacity: 0.3;
     }

@@ -6,5 +6,6 @@ export { default as Button } from './Button/index';
 export { default as Modal } from './Modal/index';
 export { default as Label } from './Label/index';
 export { default as Avatar } from './Avatar/index';
+export { default as Flashbag } from './Flashbag/index';
 
 export * from './AnimatedTitle/index'

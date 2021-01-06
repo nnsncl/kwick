@@ -74,8 +74,6 @@ export default function MessagesContainer() {
         }
     };
 
-    let ts = new Date();
-    console.log(ts)
     return (
         <Container
             variants={container}

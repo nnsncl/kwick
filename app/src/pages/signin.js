@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import { useAuth } from '../hooks/use-auth';
-import { Navigation, Layout, AnimatedTitle, Typography, Input, Button } from '../components';
+import { Navigation, Layout, AnimatedTitle, Typography, Input, Button, Flashbag } from '../components';
 
 import { motion } from 'framer-motion';
 
@@ -25,6 +25,13 @@ export default function Signin() {
         <Layout.Row alignCenter hasPadding rowReverse h100 >
           <Layout.Col size='1'>
             <AnimatedTitle>Real-time Team Collaboration</AnimatedTitle>
+            { auth.signinError && 
+              <Flashbag title='Oops! An error occured.' >
+                {auth.signinErrorMessage
+                  ? auth.signinErrorMessage
+                  : 'Fields cannot be empty'}
+              </Flashbag>
+             }
             <motion.form
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -38,6 +45,7 @@ export default function Signin() {
                 transition={{ type: "easeOut", duration: 1, delay: 0.3 }}
                 style={{ margin: '3.6rem 0rem' }} >
                 <Input
+                  error={auth.signinError}
                   label="Username"
                   name='username'
                   type='text'
@@ -46,6 +54,7 @@ export default function Signin() {
                   onChange={e => setUserName(e.target.value)}
                 />
                 <Input
+                  error={auth.signinError}
                   label="Password"
                   name='password'
                   type='password'
