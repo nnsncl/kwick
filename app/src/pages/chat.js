@@ -1,15 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import { useAuth } from '../hooks/use-auth';
+import IdleTimer from '../utils/idle-timer';
 
 import { UsersContainer, MessagesContainer } from '../containers';
-import { Layout, Button, Navigation, Modal } from '../components';
+import { Layout, Button, Navigation, Modal, Spinner } from '../components';
 
 export default function Chat() {
     const auth = useAuth();
+    const [timeout, setTimeout] = useState(false);
     const [toggleUsersModal, setToggleUsersModal] = useState(false);
+
+    useEffect(() => {
+        const timer = new IdleTimer({
+            timeout: 10, //expire after 10 seconds
+            onTimeout: () => {
+                setTimeout(true);
+            },
+            onExpired: () => {
+                //do something if expired on load
+                setTimeout(true);
+            }
+        });
+
+        return () => {
+            timer.cleanUp();
+        };
+    }, []);
+
+    console.log(timeout ? 'oui' : 'nin')
 
     return auth.localStorageUser ? (
         <>
@@ -21,6 +42,9 @@ export default function Chat() {
                 <UsersContainer />
             </Modal>
             <Navigation>
+                <Button.Small>
+                    <Spinner />
+                </Button.Small>
                 <Button.Small onClick={() => setToggleUsersModal(!toggleUsersModal)}  >
                     <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
                         <path opacity="0.3" d="M24 22C19.5817 22 16 18.4183 16 14C16 9.58172 19.5817 6 24 6C28.4183 6 32 9.58172 32 14C32 18.4183 28.4183 22 24 22Z" fill="#111" />
