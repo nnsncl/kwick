@@ -72,6 +72,10 @@ export const ChatInput = styled(motion.form)`
     }
 `;
 
+export const Counter = styled(Typography.BodySmall)`
+    ${(props) => props.error && (`b {color: rgb(220, 47, 2)}`)}
+`;
+
 export const ItemContainer = styled.div`
     span {
         margin-right: 1.3rem;

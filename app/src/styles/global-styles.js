@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
+/* HTML5 display-role reset for older browsers */
 export const GlobalStyles = createGlobalStyle`
     * {
         box-sizing: border-box;
@@ -23,7 +24,6 @@ export const GlobalStyles = createGlobalStyle`
         font: inherit;
         vertical-align: baseline;
     }
-    /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure, 
     footer, header, hgroup, menu, nav, section {
         display: block;
@@ -53,7 +53,6 @@ export const GlobalStyles = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         background: #f5f3f4;
         color: #111;
-        ${'' /* background: #f5f3f4; */}
     }
     
     body {

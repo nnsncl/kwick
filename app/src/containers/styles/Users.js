@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 100%;
-    max-height: 86vh;
+    max-height: 33.3vh;
     overflow: scroll;
 `;
 export const Frame = styled.div`

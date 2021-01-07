@@ -23,7 +23,11 @@ export const BrandWrapper = styled.div`
 export const ActionWrapper = styled.div`
     ul {
         list-style: none;
-        display: flex;
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: center;  
+        }
         a {
             text-decoration: none;
             color: #111;
