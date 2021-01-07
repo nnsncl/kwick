@@ -11,28 +11,31 @@ import { Layout, Button, Navigation, Modal, Spinner } from '../components';
 export default function Chat() {
     const auth = useAuth();
     const [timeout, setTimeout] = useState(false);
+    const [expired, setExpired] = useState(false);
     const [toggleUsersModal, setToggleUsersModal] = useState(false);
 
     useEffect(() => {
         const timer = new IdleTimer({
-            timeout: 10, //expire after 10 seconds
+            timeout: 1200, //expire after 20 mins of inactivity
+
+            // This callback will be triggered if the users are in the app and have the idle timeout.
             onTimeout: () => {
                 setTimeout(true);
             },
+            // This callback will be triggered if the users re-open the app after the expired time.
             onExpired: () => {
-                //do something if expired on load
-                setTimeout(true);
+                setExpired(true);
             }
         });
 
         return () => {
             timer.cleanUp();
         };
+
     }, []);
 
-    console.log(timeout ? 'oui' : 'nin')
-
-    return auth.localStorageUser ? (
+    // Redirect to Signin if user hasn't signed in or if his session is expired
+    return auth.localStorageUser && (!timeout && !expired) ? (
         <>
             <Modal
                 title="Online users"
@@ -70,5 +73,7 @@ export default function Chat() {
                 </Layout.Row>
             </Layout>
         </>
-    ) : (<Redirect to="/signin" />);
+    ) : (
+        <Redirect to="/signin" />
+    );
 }
