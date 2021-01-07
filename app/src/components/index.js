@@ -7,5 +7,6 @@ export { default as Modal } from './Modal/index';
 export { default as Label } from './Label/index';
 export { default as Avatar } from './Avatar/index';
 export { default as Flashbag } from './Flashbag/index';
+export { default as Spinner } from './Spinner/index';
 
 export * from './AnimatedTitle/index'
