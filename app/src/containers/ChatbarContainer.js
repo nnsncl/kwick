@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../hooks/use-auth';
 
 import { Button } from '../components';
-import { ChatInput, ItemContainer, Counter } from './styles/Messages';
+import { ChatInput, ChatHeader, ItemContainer, Counter } from './styles/Messages';
 import { container } from './styles/Animation';
 
 export default function ChatbarContainer() {
@@ -13,6 +13,10 @@ export default function ChatbarContainer() {
 
     const handlePostMessage = (e) => {
         e.preventDefault();
+
+        let mlerm = new Audio();
+        mlerm.src = '/mp3/mlerm.mp3';
+
         async function sendMessage() {
             try {
                 await axios.get(`${auth.apiURL}/say/${auth.localStorageUser.token}/${auth.localStorageUser.id}/${message}`);
@@ -21,12 +25,12 @@ export default function ChatbarContainer() {
             }
         }
 
-        if(message.length !== 0){
+        if (message.length !== 0) {
             setMessage('');
             sendMessage();
             auth.getMessages();
+            mlerm.play();
         }
-
     }
 
     return (
@@ -35,16 +39,18 @@ export default function ChatbarContainer() {
             initial="hidden"
             animate={"visible"}
             onSubmit={handlePostMessage} >
-            <Counter error={message.length === 0 || message.length === 140} >
-                <b>{message.length}</b>/140
-            </Counter>
-            <input
-                maxLength='140'
-                placeholder="Send a message"
-                value={message ? message : ''}
-                type='text'
-                onChange={e => setMessage(e.target.value)}
-            />
+            <ChatHeader>
+                <input
+                    maxLength='140'
+                    placeholder="Send a message"
+                    value={message ? message : ''}
+                    type='text'
+                    onChange={e => setMessage(e.target.value)}
+                />
+                <Counter error={message.length === 0 || message.length === 140} >
+                    <b>{message.length}</b>/140
+                </Counter>
+            </ChatHeader>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
                 <ItemContainer>
                     <span>
