@@ -90,7 +90,9 @@ function useProvideAuth() {
 }
 
   function signout() {
-    setLocalStorageUser(null);
+    if(localStorageUser) {
+      setLocalStorageUser(null);
+    }
   }
 
   // Return the user object and auth methods
