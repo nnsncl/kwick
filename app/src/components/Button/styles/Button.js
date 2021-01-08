@@ -19,10 +19,6 @@ export const Container = styled(motion.button)`
         background: #111;
         color: white;
     }
-
-    ${(restProps) => restProps.hasMargin && (`
-        margin: 2.3rem 0;
-    `)}
 `;
 
 export const Action = styled(motion.button)`

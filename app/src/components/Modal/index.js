@@ -49,12 +49,11 @@ export default function Modal({
     toggleModal,
     setToggleModal,
     title,
-    body,
-    modifiers,
     children,
     alert }) {
     return (
         <AnimatePresence initial={false} >
+            {/* if toggleModal is true, display the modal, else, render null */}
             { toggleModal
                 ? <ViewportOverlay
                     key="modal-overlay"
@@ -66,6 +65,7 @@ export default function Modal({
                     <ModalWrapper variants={modalOrchestration}>
                         <ModalHeading alert={alert} variants={modalItem} >
                             <Typography.BodyLarge>{title}</Typography.BodyLarge>
+                            {/* If the alert property is true display disconnect icon else display close button*/}
                             {
                                 alert
                                     ? <Button.Small
@@ -88,7 +88,7 @@ export default function Modal({
                             }
                         </ModalHeading>
                         <ModalContent variants={modalItem} >
-                        {children}
+                            {children}
                         </ModalContent>
                     </ModalWrapper>
                 </ViewportOverlay>

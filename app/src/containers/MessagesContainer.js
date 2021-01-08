@@ -29,7 +29,6 @@ export default function MessagesContainer() {
         }
     }, [auth.messages])
 
-
     return (
         <Container
             variants={container}

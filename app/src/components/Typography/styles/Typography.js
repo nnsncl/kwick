@@ -16,10 +16,6 @@ export const TitleMd = styled.h2`
     font-size: 5.6rem;
     font-weight: 400;
     letter-spacing: -1.9px;
-    margin-bottom: ${(restProps) => restProps.hasMarginBottom
-        ? ` 5.6rem;`
-        : ` 3.6rem;`
-    };
     transition: font-size ease-in .2s;
 
     @media(max-width: 672px){
@@ -30,10 +26,6 @@ export const TitleSm = styled.h3`
     font-size: 5.6rem;
     font-weight: 400;
     letter-spacing: -1.9px;
-    margin-bottom: ${(restProps) => restProps.hasMarginBottom
-        ? ` 5.6rem;`
-        : ` 3.6rem;`
-    };
     transition: font-size ease-in .2s;
 
     @media(max-width: 672px){

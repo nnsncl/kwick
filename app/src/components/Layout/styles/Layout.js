@@ -12,9 +12,7 @@ export const Container = styled.section`
     ${(restProps) => restProps.maxFreezeLarge && (`
        max-width: 1920px;
     `)}
-    ${(restProps) => restProps.maxFreeze && (`
-       max-width: 1440px;
-    `)}
+
     ${(restProps) => restProps.maxFreezeSmall && (`
        max-width: 1024px;
     `)}
@@ -42,14 +40,6 @@ export const Row = styled.div`
         align-items: stretch;
     `)}
 
-    ${(restProps) => restProps.h75 && (`
-        min-height: 66vh;
-        align-items: flex-end;
-
-        @media(max-width: 1056px) {
-            min-height: 50vh;
-        }
-    `)}
     ${(restProps) => restProps.h100 && (`
         min-height: 100vh;
     `)}
@@ -57,13 +47,7 @@ export const Row = styled.div`
     ${(restProps) => restProps.hasPadding && (`
         padding: 5.6rem 0;
     `)}
-    ${(restProps) => restProps.hasPaddingLg && (`
-        padding: 33vh 0;
-    `)}
 
-    @media(max-width: 674px) {
-        flex-direction: ${(restProps) => restProps.responsiveCol && (`column`)};
-    }
 `;
 
 export const Col = styled.div`
