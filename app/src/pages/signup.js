@@ -19,19 +19,19 @@ export default function Signup() {
 
   return (
     <>
-      { auth.localStorageUser && <Redirect to="/chat" /> }
+      { auth.localStorageUser && <Redirect to="/chat" />}
       <Navigation />
       <Layout maxFreezeLarge >
         <Layout.Row alignCenter hasPadding rowReverse h100 >
           <Layout.Col size='1'>
             <AnimatedTitle>Real-time Team Collaboration</AnimatedTitle>
-            { auth.signupError && 
+            {auth.signupError &&
               <Flashbag title='Oops! An error occured.' >
                 {auth.signupErrorMessage
                   ? auth.signupErrorMessage
                   : 'Fields cannot be empty'}
               </Flashbag>
-             }
+            }
             <motion.form
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -50,7 +50,11 @@ export default function Signup() {
                   type='text'
                   defaultValue=''
                   placeholder="Username"
-                  onChange={e => setUserName(e.target.value)}
+                  onChange={e => setUserName(
+                    e.target.value
+                      .trim()
+                      .toLowerCase()
+                  )}
                 />
                 <Input
                   required
@@ -59,7 +63,11 @@ export default function Signup() {
                   type='password'
                   defaultValue=''
                   placeholder="••••••••"
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={e => setPassword(
+                    e.target.value
+                      .trim()
+                      .toLowerCase()
+                  )}
                   style={{ marginBottom: '1.3rem' }}
                 />
                 <Typography.BodySmall>Already have an account? <Link to='/signin'>Sign in</Link></Typography.BodySmall>
