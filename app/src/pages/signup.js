@@ -14,6 +14,7 @@ export default function Signup() {
 
   const handleSignup = (e) => {
     e.preventDefault()
+    // Use auth context signup method
     auth.signup(username, password)
   }
 
@@ -25,6 +26,7 @@ export default function Signup() {
         <Layout.Row alignCenter hasPadding rowReverse h100 >
           <Layout.Col size='1'>
             <AnimatedTitle>Real-time Team Collaboration</AnimatedTitle>
+            {/* if the signup method detects an error, show the flashbag */}
             {auth.signupError &&
               <Flashbag title='Oops! An error occured.' >
                 {auth.signupErrorMessage

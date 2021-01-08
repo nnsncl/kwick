@@ -14,9 +14,12 @@ export default function Signin() {
 
   const handleSignin = (e) => {
     e.preventDefault()
+    // Use auth context signin method
     auth.signin(username, password)
   }
 
+
+  // If the user is already online, redirect to Chat
   return (
     <>
     { auth.localStorageUser && <Redirect to="/chat" /> }
@@ -25,6 +28,7 @@ export default function Signin() {
         <Layout.Row alignCenter hasPadding rowReverse h100 >
           <Layout.Col size='1'>
             <AnimatedTitle>Real-time Team Collaboration</AnimatedTitle>
+            {/* if the signin method detects an error, show the flashbag */}
             { auth.signinError && 
               <Flashbag title='Oops! An error occured.' >
                 {auth.signinErrorMessage
