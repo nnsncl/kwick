@@ -1,4 +1,4 @@
-
+// Format unix epoch timestamp to human readable timestamp
 export function getTimestamp(timestamp){
     const date = new Date(timestamp * 1000);
 
