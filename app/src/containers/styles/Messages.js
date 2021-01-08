@@ -72,6 +72,13 @@ export const ChatInput = styled(motion.form)`
     }
 `;
 
+export const ChatHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.9rem;
+`;
+
 export const Counter = styled(Typography.BodySmall)`
     ${(props) => props.error && (`b {color: rgb(220, 47, 2)}`)}
 `;

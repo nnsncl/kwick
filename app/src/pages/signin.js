@@ -52,7 +52,11 @@ export default function Signin() {
                   type='text'
                   defaultValue=''
                   placeholder="Username"
-                  onChange={e => setUserName(e.target.value)}
+                  onChange={e => setUserName(
+                    e.target.value
+                      .trim()
+                      .toLowerCase()
+                  )}
                 />
                 <Input
                   required
@@ -62,7 +66,11 @@ export default function Signin() {
                   type='password'
                   defaultValue=''
                   placeholder="••••••••"
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={e => setPassword(
+                    e.target.value
+                      .trim()
+                      .toLowerCase()
+                  )}
                   style={{ marginBottom: '1.3rem' }}
                 />
                 <Typography.BodySmall>Don't have an account? <Link to='/'>Sign up</Link></Typography.BodySmall>
