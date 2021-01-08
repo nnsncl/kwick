@@ -31,7 +31,10 @@ export const ModalHeading = styled(motion.header)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5.6rem;
+    ${(props) => props.alert 
+        ? (`margin-bottom: 2.3rem;`)
+        : (`margin-bottom: 5.6rem;`)
+    }
 
     h3,h4,h5,h6{
         line-height: 1;
@@ -49,6 +52,15 @@ export const ModalContent = styled(motion.div)`
         display: flex;
         flex-direction: column;
         width: 100%;
+   }
+
+   hr {
+       margin: 3.6em 0;
+       border: 1px solid #f5f3f4;
+   }
+
+   p{
+       margin-bottom: 2.3rem;
    }
 `;
 
