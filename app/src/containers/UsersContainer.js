@@ -10,6 +10,7 @@ export default function UsersContainer() {
     const auth = useAuth();
     const [users, setUsers] = useState([]);
 
+    // Get all online users on page load
     useEffect(() => {
         async function getLoggedUsers() {
             try {

@@ -14,6 +14,7 @@ export default function ChatbarContainer() {
     const handlePostMessage = (e) => {
         e.preventDefault();
 
+        // Save Yoshi's sound to play it when the function fires
         let mlerm = new Audio();
         mlerm.src = '/mp3/mlerm.mp3';
 
@@ -25,7 +26,12 @@ export default function ChatbarContainer() {
             }
         }
 
-        if (message.length !== 0) {
+        // If message's state extsts and and doesn't contain only sppaces,
+        // ... set the input value to an empty string,
+        // ... fire the send message function
+        // ... get the messages list from the auth context
+        // .. Let yoshi speak
+        if (message.trim().length) {
             setMessage('');
             sendMessage();
             auth.getMessages();

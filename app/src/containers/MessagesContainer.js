@@ -11,13 +11,16 @@ import ChatbarContainer from './ChatbarContainer';
 
 export default function MessagesContainer() {
     const auth = useAuth();
+    // Create a ref to scroll to the bottom of the message list
     const lastMessageRef = useRef();
 
+    // Get messages list on page load
     useEffect(() => {
         auth.getMessages();
         //eslint-disable-next-line
     }, [])
 
+    // If messages list is updated, render the list, scroll the the ref
     useEffect(() => {
         const scrollToLastMessage = () => {
             lastMessageRef.current.scrollIntoView({
@@ -35,6 +38,7 @@ export default function MessagesContainer() {
             initial="hidden"
             animate={"visible"}
         >
+            {/* If messages list exists, map evey objects  */}
             {auth.messages && auth.messages.map((message) => (
                 <Frame
                     key={uuidv4()}
@@ -46,6 +50,7 @@ export default function MessagesContainer() {
                     <Typography.BodySmall>{getTimestamp(message.timestamp)}</Typography.BodySmall>
                 </Frame>
             ))}
+            {/* Scroll to bottom ref */}
             <div ref={lastMessageRef} />
             <ChatbarContainer />
         </Container>

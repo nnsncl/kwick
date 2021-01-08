@@ -50,7 +50,6 @@ export const BoldBody = styled(Typography.BodySmall)`
     margin-bottom: 0.9rem;
 `;
 
-
 export const ChatInput = styled(motion.form)`
     position: sticky;
     bottom: 0;
